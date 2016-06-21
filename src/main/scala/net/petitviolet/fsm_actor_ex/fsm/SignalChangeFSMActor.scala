@@ -21,12 +21,6 @@ class SignalChangeFSMActor extends Actor with FSM[State, SignalColor] {
   }
 
   onTransition {
-    case Green -> Green =>
-      println(s"KEEP! green: $stateName")
-    case Yellow -> Yellow =>
-      println(s"KEEP! yellow: $stateData")
-    case Red -> Red =>
-      println(s"KEEP! red: $stateData")
     case Green -> Yellow =>
       println(s"WARN! green -> yellow: $stateData")
     case Yellow -> Red =>
