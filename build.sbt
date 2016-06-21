@@ -1,3 +1,5 @@
+import sbt.Keys._
+
 name := """fsm_actor_ex"""
 
 version := "1.0"
