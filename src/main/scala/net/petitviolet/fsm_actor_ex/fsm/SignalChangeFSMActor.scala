@@ -2,7 +2,7 @@ package net.petitviolet.fsm_actor_ex.fsm
 
 import akka.actor.{ FSM, Actor }
 
-class SignalChangeFSMActor extends Actor with FSM[State, SignalColor] {
+class SignalChangeFSMActor extends Actor with FSM[State, Data] {
   startWith(Red, SignalColor("init"))
 
   when(Green) {
