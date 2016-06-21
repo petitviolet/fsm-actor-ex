@@ -1,4 +1,3 @@
-activator-akka-scala-seed
-=========================
+# FSM with Actor
 
-A minimal seed template for an Akka with Scala build 
+Chapter.7 in "Reactive programming with Scala and Actor"
