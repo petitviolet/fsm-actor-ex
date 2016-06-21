@@ -1,7 +1,8 @@
-package net.petitviolet.fsm_actor_ex.example
+package net.petitviolet.fsm_actor_ex.app
 
 import akka.actor.ActorSystem
 import akka.testkit.{ImplicitSender, TestKit}
+import net.petitviolet.fsm_actor_ex.ping.{PongActor, PingActor}
 import org.scalatest.{BeforeAndAfterAll, Matchers, WordSpecLike}
  
 class PingPongActorSpec(_system: ActorSystem) extends TestKit(_system) with ImplicitSender
