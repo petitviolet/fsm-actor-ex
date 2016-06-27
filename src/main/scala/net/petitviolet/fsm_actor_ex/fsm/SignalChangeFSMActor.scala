@@ -1,23 +1,34 @@
 package net.petitviolet.fsm_actor_ex.fsm
 
 import akka.actor.{ FSM, Actor }
+import net.petitviolet.fsm_actor_ex.fsm.SignalData._
 
-class SignalChangeFSMActor extends Actor with FSM[State, Data] {
-  startWith(Red, SignalColor("init"))
+class SignalChangeFSMActor extends Actor with FSM[SignalState, SignalData] {
+  startWith(Red, RedData)
+
+  private def stayWithLogging = {
+    println(s"retain: $stateData")
+    stay
+  }
+
+  private def gotoWithLogging(d: Any)(s: SignalState) = {
+    println(s"current => $stateData, d => $d")
+    goto(s)
+  }
 
   when(Green) {
-    case Event(Change, _) => goto(Yellow) using SignalColor("green -> yello")
-    case Event(Retain, _) => stay using SignalColor("retain green")
+    case Event(ChangeSignal, _) => goto(Yellow) using YellowData
+    case Event(RetainSignal, _) => stay
   }
 
   when(Yellow) {
-    case Event(Change, _) => goto(Red) using SignalColor("yellow -> red")
-    case Event(Retain, _) => stay using SignalColor("retain yellow")
+    case Event(ChangeSignal, _) => goto(Red) using RedData
+    case Event(RetainSignal, _) => stay
   }
 
   when(Red) {
-    case Event(Change, _) => goto(Green) using SignalColor("red -> green")
-    case Event(Retain, _) => stay using SignalColor("retain red")
+    case Event(ChangeSignal, _) => goto(Green) using GreenData
+    case Event(RetainSignal, _) => stay
   }
 
   onTransition {
